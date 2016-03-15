@@ -19,6 +19,11 @@ namespace WorldTravelSimulation.Classes.Area
             Fields.Add(field);    
         }
 
+        public IList<Field> GetAllFields()
+        {
+            return Fields;
+        } 
+
         public Field GetFieldByPosition(Position position)
         {
             var field = Fields.FirstOrDefault(x => x.DoesFieldCoverPosition(position));

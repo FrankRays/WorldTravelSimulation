@@ -76,6 +76,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WorldTravelSimulation.Classes\WorldTravelSimulation.Classes.csproj">
+      <Project>{89c052bc-fde3-4c0d-947c-d85b8a0ca251}</Project>
+      <Name>WorldTravelSimulation.Classes</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

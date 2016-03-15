@@ -46,10 +46,9 @@
     <Compile Include="Area\Map.cs" />
     <Compile Include="Format\Position.cs" />
     <Compile Include="Format\Size.cs" />
-    <Compile Include="GUI\GraphicalField.cs" />
-    <Compile Include="GUI\GraphicalFieldFactory.cs" />
-    <Compile Include="GUI\Ground.cs" />
-    <Compile Include="GUI\Water.cs" />
+    <Compile Include="GUI\PictureFactory.cs" />
+    <Compile Include="Area\Ground.cs" />
+    <Compile Include="Area\Water.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
