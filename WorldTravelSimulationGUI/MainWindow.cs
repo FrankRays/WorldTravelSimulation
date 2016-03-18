@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
 using WorldTravelSimulation.Classes.Area;
 using WorldTravelSimulation.Classes.Format;
@@ -15,19 +14,13 @@ namespace WorldTravelSimulationGUI
 
         public MainWindow()
         {
-            map = new Map();
-            map.Size = new Size() {Height = 1, Width = 1};
+            map = new Map
+            {
+                Size = new Size() {Height = 1, Width = 1}
+            };
             ClientSize = new System.Drawing.Size(512,512);
 
-            MapGenerator generator = new MapGenerator
-            {
-                MapHeight = ClientSize.Height,
-                MapWidth = ClientSize.Width,
-                StartPosition = new Position() {X = 0, Y = 0}
-            };
-            generator.GenerateMap();
-
-            map.AddFields(generator.Map);
+            map.GenerateMap(new Size() {Height = 0.001953, Width = 0.001953});
             MapDraw();            
             
             InitializeComponent();

@@ -50,8 +50,8 @@ namespace WorldTravelSimulation.Classes.GUI
 
         public static Size GetPictureSizeFromFieldSize(Format.Size size)
         {
-            int width = (int)(size.Width * FormSize.Width);
-            int height = (int)(size.Height * FormSize.Height);
+            int width = (int)Math.Round(size.Width * FormSize.Width,0);
+            int height = (int)Math.Round(size.Height * FormSize.Height,0);
 
             return new Size() { Height = height, Width = width };
         }

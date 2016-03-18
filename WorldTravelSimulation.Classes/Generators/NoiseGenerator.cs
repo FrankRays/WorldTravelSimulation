@@ -1,22 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WorldTravelSimulation.Classes.Generators
 {
-    public class NoiseGenerator
+    public static class NoiseGenerator
     {
-        private static Random rndGen = new Random();
+        private static Random Random = new Random();
 
         public static float[] GenerateRandom(float min, float max, int numberOfValues)
         {
             float[] values = new float[numberOfValues];
 
             for (int i = 0; i < values.Length; i++)
-                values[i] = rndGen.Next((int) min*10000, (int) max*10000)/10000f;
+            {
+                values[i] = (float) (Random.NextDouble()*(max - min) + min);
+            }
 
             return values;
         }
@@ -57,7 +55,6 @@ namespace WorldTravelSimulation.Classes.Generators
                             values[y, x] += (float) ((currentValues[y, x])*(1f/(Math.Pow(2, i))));
                         else
                             values[y, x] += (float) ((currentValues[y, x] - 0.5f)*(1f/(Math.Pow(2, i))));
-                                //-0.5f is so that the point is geting +/- 0.5f as to +(0f to 1f)
                     }
                 }
             }
@@ -152,23 +149,6 @@ namespace WorldTravelSimulation.Classes.Generators
             float f = (float) (1f - Math.Cos(ft))*.5f;
 
             return a*(1f - f) + b*f;
-
-            //return (b - a) * x;
-        }
-
-        public static float[,] Slice(float[,] values, float cutOffValue)
-        {
-            for (int y = 0; y < values.GetLength(0); y++)
-            {
-                for (int x = 0; x < values.GetLength(1); x++)
-                {
-                    if (values[y, x] < cutOffValue)
-                    {
-                        values[y, x] = cutOffValue;
-                    }
-                }
-            }
-            return values;
         }
     }
 }
