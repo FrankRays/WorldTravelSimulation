@@ -16,7 +16,7 @@ namespace WorldTravelSimulation.Classes.GUI
             PictureBox picture = new PictureBox()
             {
                 BackColor = GetPictureColor(field),
-                Location = GetPicturePointFromFieldPosition(field.Position),
+                Location = GetPicturePointFromFieldPosition(field.Position,field.Size),
                 Size = GetPictureSizeFromFieldSize(field.Size)
             };
             
@@ -37,18 +37,21 @@ namespace WorldTravelSimulation.Classes.GUI
         }
 
 
-        public static Point GetPicturePointFromFieldPosition(Position position)
+        public static Point GetPicturePointFromFieldPosition(Position position, Format.Size size)
         {
-            int x = (int)Math.Round(position.X * FormSize.Width, 0);
-            int y = (int)Math.Round(position.Y * FormSize.Height, 0);
+            int x = (int)Math.Round(position.X * FormSize.Width,0);
+            int y = (int)Math.Round(position.Y * FormSize.Height,0);
+
+            y = Math.Abs(y - FormSize.Height);
+            y -= GetPictureSizeFromFieldSize(size).Height; 
 
             return new Point() { X = x, Y = y };
         }
 
         public static Size GetPictureSizeFromFieldSize(Format.Size size)
         {
-            int width = (int)Math.Round(size.Width * FormSize.Width, 0);
-            int height = (int)Math.Round(size.Height * FormSize.Height, 0);
+            int width = (int)(size.Width * FormSize.Width);
+            int height = (int)(size.Height * FormSize.Height);
 
             return new Size() { Height = height, Width = width };
         }

@@ -46,6 +46,8 @@
     <Compile Include="Area\Map.cs" />
     <Compile Include="Format\Position.cs" />
     <Compile Include="Format\Size.cs" />
+    <Compile Include="Generators\MapGenerator.cs" />
+    <Compile Include="Generators\NoiseGenerator.cs" />
     <Compile Include="GUI\PictureFactory.cs" />
     <Compile Include="Area\Ground.cs" />
     <Compile Include="Area\Water.cs" />

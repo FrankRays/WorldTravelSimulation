@@ -42,9 +42,19 @@ namespace WorldTravelSimulation.Tests
             Assert.AreEqual(Color.Blue, picture.BackColor);
         }
 
-        public void SizeAndPositionConversion()
+        [TestCase(0,0,0,11)]
+        [TestCase(1,1,11,11)]
+        [TestCase(0.09,0.09,0,0)]
+        [TestCase(0.091,0.091,1,1)]
+        [TestCase(0.181817,0.181817,1,1)]
+        [TestCase(0.1819,0.1819,2,2)]
+        public void SizeAndPositionConversion(double fieldX, double fieldY, int pictureX, int pictureY)
         {
-            
+            PictureFactory.FormSize = new Size() {Height = 11,Width = 11};
+            Position position = new Position() {X = fieldX, Y = fieldY};
+            Point point = PictureFactory.GetPicturePointFromFieldPosition(position);
+            Assert.AreEqual(pictureX,point.X);
+            Assert.AreEqual(pictureY,point.Y);
         }
     }
 }

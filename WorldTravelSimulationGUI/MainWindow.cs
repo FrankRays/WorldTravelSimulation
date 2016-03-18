@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using WorldTravelSimulation.Classes.Area;
 using WorldTravelSimulation.Classes.Format;
+using WorldTravelSimulation.Classes.Generators;
 using WorldTravelSimulation.Classes.GUI;
+using Size = WorldTravelSimulation.Classes.Format.Size;
 
 namespace WorldTravelSimulationGUI
 {
@@ -14,15 +17,19 @@ namespace WorldTravelSimulationGUI
         {
             map = new Map();
             map.Size = new Size() {Height = 1, Width = 1};
+            ClientSize = new System.Drawing.Size(512,512);
 
-            Field water = new Water()
+            MapGenerator generator = new MapGenerator
             {
-                Position = new Position() { X=0.5,Y=0.5},
-                Size = new Size() { Height = 0.1,Width = 0.1}
+                MapHeight = ClientSize.Height,
+                MapWidth = ClientSize.Width,
+                StartPosition = new Position() {X = 0, Y = 0}
             };
+            generator.GenerateMap();
 
-            DrawField(water);
-
+            map.AddFields(generator.Map);
+            MapDraw();            
+            
             InitializeComponent();
         }
 
@@ -37,7 +44,7 @@ namespace WorldTravelSimulationGUI
 
         public void DrawField(Field field)
         {
-            PictureFactory.FormSize = this.Size;
+            PictureFactory.FormSize = ClientSize;
             PictureBox fieldPicture = PictureFactory.CreatePicture(field);
             Controls.Add(fieldPicture);
         }

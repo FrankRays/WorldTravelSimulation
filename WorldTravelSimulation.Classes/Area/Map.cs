@@ -19,6 +19,14 @@ namespace WorldTravelSimulation.Classes.Area
             Fields.Add(field);    
         }
 
+        public void AddFields(IList<Field> fields)
+        {
+            foreach (var f in fields)
+            {
+                AddField(f);
+            }
+        }
+
         public IList<Field> GetAllFields()
         {
             return Fields;
