@@ -39,8 +39,8 @@ namespace WorldTravelSimulation.Classes.GUI
 
         public static Point GetPicturePointFromFieldPosition(Position position, Format.Size size)
         {
-            int x = (int)Math.Round(position.X * FormSize.Width,0);
-            int y = (int)Math.Round(position.Y * FormSize.Height,0);
+            int x = (int)(position.X * FormSize.Width);
+            int y = (int)(position.Y * FormSize.Height);
 
             y = Math.Abs(y - FormSize.Height);
             y -= GetPictureSizeFromFieldSize(size).Height; 
@@ -49,9 +49,9 @@ namespace WorldTravelSimulation.Classes.GUI
         }
 
         public static Size GetPictureSizeFromFieldSize(Format.Size size)
-        {
-            int width = (int)Math.Round(size.Width * FormSize.Width,0);
-            int height = (int)Math.Round(size.Height * FormSize.Height,0);
+        {            
+            int width = (int)Math.Ceiling(size.Width * FormSize.Width);
+            int height = (int)Math.Ceiling(size.Height * FormSize.Height);
 
             return new Size() { Height = height, Width = width };
         }

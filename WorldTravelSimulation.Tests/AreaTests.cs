@@ -105,5 +105,19 @@ namespace WorldTravelSimulation.Tests
             }));
         }
 
+        [TestCase(1,1)]
+        [TestCase(11,11)]
+        [TestCase(100,100)]
+        [TestCase(11,13)]
+        [TestCase(13,11)]
+        public void GeneratedMapSizeTest(int fieldsHorizontal, int fieldsVertical)
+        {
+            Map map = new Map();
+            map.GenerateMap(fieldsHorizontal, fieldsVertical);
+
+            int mapSize = fieldsHorizontal*fieldsVertical;
+
+            Assert.AreEqual(mapSize, map.GetAllFields().Count);
+        }
     }
 }

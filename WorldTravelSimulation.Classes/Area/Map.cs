@@ -15,7 +15,8 @@ namespace WorldTravelSimulation.Classes.Area
         public Map()
         {
             Fields = new List<Field>();
-            MapGenerator = new PerlinNoiseMapGenerator();
+            MapGenerator = new SimplexNoiseMapGenerator();
+            Size = new Size() {Height = 1, Width = 1};
         }
 
         public void AddField(Field field)
@@ -42,9 +43,14 @@ namespace WorldTravelSimulation.Classes.Area
             return field;
         }
 
-        public void GenerateMap(Size fielSize)
+        public void GenerateMap(Size fieldSize)
         {
-            Fields = MapGenerator.GenerateMap(Size,fielSize);
+            Fields = MapGenerator.GenerateMap(Size,fieldSize);
+        }
+
+        public void GenerateMap(int fieldsHorizontal, int fieldsVertical)
+        {
+            Fields = MapGenerator.GenerateMap(Size, fieldsHorizontal, fieldsVertical);
         }
     }
 }

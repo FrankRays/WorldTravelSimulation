@@ -7,5 +7,6 @@ namespace WorldTravelSimulation.Classes.Generators
     public interface IMapGenerator
     {
         IList<Field> GenerateMap(Size mapSize, Size fieldSize);
+        IList<Field> GenerateMap(Size mapSize, int fieldsHorizontal, int fieldsVertical);
     }
 }

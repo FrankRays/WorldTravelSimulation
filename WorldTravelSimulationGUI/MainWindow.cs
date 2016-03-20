@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
 using WorldTravelSimulation.Classes.Area;
-using WorldTravelSimulation.Classes.Format;
-using WorldTravelSimulation.Classes.Generators;
 using WorldTravelSimulation.Classes.GUI;
 using Size = WorldTravelSimulation.Classes.Format.Size;
 
@@ -18,9 +16,9 @@ namespace WorldTravelSimulationGUI
             {
                 Size = new Size() {Height = 1, Width = 1}
             };
-            ClientSize = new System.Drawing.Size(512,512);
+            ClientSize = new System.Drawing.Size(1024,512);
 
-            map.GenerateMap(new Size() {Height = 0.001953, Width = 0.001953});
+            map.GenerateMap(300,600);
             MapDraw();            
             
             InitializeComponent();

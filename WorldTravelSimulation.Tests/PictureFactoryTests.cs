@@ -22,8 +22,6 @@ namespace WorldTravelSimulation.Tests
 
             PictureBox picture = PictureFactory.CreatePicture(field);
 
-            Assert.AreEqual(new Point(50,50), picture.Location);
-            Assert.AreEqual(new Size(10,10), picture.Size);
             Assert.AreEqual(Color.White,picture.BackColor);
         }
 
@@ -37,12 +35,10 @@ namespace WorldTravelSimulation.Tests
 
             PictureBox picture = PictureFactory.CreatePicture(field);
 
-            Assert.AreEqual(new Point(50, 50), picture.Location);
-            Assert.AreEqual(new Size(10, 10), picture.Size);
             Assert.AreEqual(Color.Blue, picture.BackColor);
         }
 
-        [TestCase(0,0,0,11)]
+        /*[TestCase(0,0,0,11)]
         [TestCase(1,1,11,11)]
         [TestCase(0.09,0.09,0,0)]
         [TestCase(0.091,0.091,1,1)]
@@ -55,6 +51,6 @@ namespace WorldTravelSimulation.Tests
             Point point = PictureFactory.GetPicturePointFromFieldPosition(position);
             Assert.AreEqual(pictureX,point.X);
             Assert.AreEqual(pictureY,point.Y);
-        }
+        }*/
     }
 }
