@@ -1,56 +1,34 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using WorldTravelSimulation.Classes.Format;
 using WorldTravelSimulation.Classes.Generators;
+using WorldTravelSimulation.Classes.Generators.SimplexNoise;
 
 namespace WorldTravelSimulation.Classes.Area
 {
     public class Map
     {
-        private IList<Field> Fields;
+        private IList<Field> _fields;
+        public int FieldsHorizontal { get; }
+        public int FieldsVertical { get; }
 
-        public IMapGenerator MapGenerator { get; set; }
-        public Size Size { get; set; }
+        public IMapGenerator MapGenerator { get; set; }        
 
-        public Map()
+        public Map(int fieldsHorizontal, int fieldsVertical)
         {
-            Fields = new List<Field>();
+            FieldsHorizontal = fieldsHorizontal;
+            FieldsVertical = fieldsVertical;
+            _fields = new List<Field>();            
+
             MapGenerator = new SimplexNoiseMapGenerator();
-            Size = new Size() {Height = 1, Width = 1};
-        }
-
-        public void AddField(Field field)
-        {
-            Fields.Add(field);    
-        }
-
-        public void AddFields(IList<Field> fields)
-        {
-            foreach (var f in fields)
-            {
-                AddField(f);
-            }
         }
 
         public IList<Field> GetAllFields()
         {
-            return Fields;
+            return _fields;
         } 
-
-        public Field GetFieldByPosition(Position position)
+       
+        public void GenerateMap()
         {
-            var field = Fields.FirstOrDefault(x => x.DoesFieldCoverPosition(position));
-            return field;
-        }
-
-        public void GenerateMap(Size fieldSize)
-        {
-            Fields = MapGenerator.GenerateMap(Size,fieldSize);
-        }
-
-        public void GenerateMap(int fieldsHorizontal, int fieldsVertical)
-        {
-            Fields = MapGenerator.GenerateMap(Size, fieldsHorizontal, fieldsVertical);
+            _fields = MapGenerator.GenerateMap(FieldsHorizontal, FieldsVertical);
         }
     }
 }

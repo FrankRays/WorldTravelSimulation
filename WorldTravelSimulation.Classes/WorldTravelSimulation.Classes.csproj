@@ -47,14 +47,15 @@
     <Compile Include="Format\Position.cs" />
     <Compile Include="Format\Size.cs" />
     <Compile Include="Generators\IMapGenerator.cs" />
-    <Compile Include="Generators\SimplexNoiseMapGenerator.cs" />
+    <Compile Include="Generators\SimplexNoise\SimplexNoiseMapGenerator.cs" />
     <Compile Include="Generators\SimplexNoise\SimplexNoiseGenerator.cs" />
     <Compile Include="Generators\SimplexNoise\SimplexNoiseOctave.cs" />
-    <Compile Include="GUI\PictureFactory.cs" />
     <Compile Include="Area\Ground.cs" />
     <Compile Include="Area\Water.cs" />
+    <Compile Include="GUI\BitmapGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

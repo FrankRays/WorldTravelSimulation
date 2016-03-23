@@ -1,6 +1,5 @@
 ﻿using System.Drawing;
 using NUnit.Framework;
-using WorldTravelSimulation.Classes.Generators;
 using Size = WorldTravelSimulation.Classes.Format.Size;
 
 namespace WorldTravelSimulation.Tests
@@ -53,20 +52,7 @@ namespace WorldTravelSimulation.Tests
             int fieldAmount = _generator.FieldAmountHorizontal();
 
             Assert.AreEqual(fieldsHorizontal,fieldAmount);
-        }
-
-        [TestCase(0,2)]
-        [TestCase(1,2)]
-        [TestCase(2,2)]
-        [TestCase(3,4)]
-        [TestCase(4,4)]
-        [TestCase(5,8)]
-        [TestCase(9,16)]
-        public void NearestPowerOfTwoTest(int input, int output)
-        {
-            int value = _generator.FindNearestPowerOfTwo(input);
-            Assert.AreEqual(output, value);
-        }
+        }        
 
         [TestCase(0,0,0,0)]
         [TestCase(0.1,0.1,0,0)]
@@ -78,7 +64,7 @@ namespace WorldTravelSimulation.Tests
             _generator.FieldsVertical = 10;
             _generator.FieldsHorizontal = 10;
 
-            Point perlinPoint = _generator.PerlinNoisePointFromFieldPosition(x, y);
+            Point perlinPoint = _generator.SimplexNoisePointFromFieldPosition(x, y);
             Assert.AreEqual(perlinX,perlinPoint.X);
             Assert.AreEqual(perlinY,perlinPoint.Y);
         }    

@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
 using WorldTravelSimulation.Classes.Area;
-using WorldTravelSimulation.Classes.Format;
 
 namespace WorldTravelSimulation.Classes.Generators
 {
     public interface IMapGenerator
     {
-        IList<Field> GenerateMap(Size mapSize, Size fieldSize);
-        IList<Field> GenerateMap(Size mapSize, int fieldsHorizontal, int fieldsVertical);
+        IList<Field> GenerateMap(int fieldsHorizontal, int fieldsVertical);
     }
 }

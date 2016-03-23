@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using WorldTravelSimulation.Classes.Area;
 using WorldTravelSimulation.Classes.GUI;
@@ -8,17 +9,15 @@ namespace WorldTravelSimulationGUI
 {
     public partial class MainWindow : Form
     {
-        private Map map;
+        private readonly Map _map;
 
         public MainWindow()
         {
-            map = new Map
-            {
-                Size = new Size() {Height = 1, Width = 1}
-            };
-            ClientSize = new System.Drawing.Size(1024,512);
+            ClientSize = new System.Drawing.Size(1280,720);
 
-            map.GenerateMap(300,600);
+            _map = new Map(1280, 720);            
+            _map.GenerateMap();
+
             MapDraw();            
             
             InitializeComponent();
@@ -26,18 +25,13 @@ namespace WorldTravelSimulationGUI
 
         public void MapDraw()
         {
-            IList<Field> fields = map.GetAllFields();
-            foreach (var f in fields)
+            PictureBox mapPictureBox = new PictureBox
             {
-                DrawField(f);
-            }
-        }
-
-        public void DrawField(Field field)
-        {
-            PictureFactory.FormSize = ClientSize;
-            PictureBox fieldPicture = PictureFactory.CreatePicture(field);
-            Controls.Add(fieldPicture);
-        }
+                Image = BitmapGenerator.GenerateFieldMapBitmap(_map),
+                Location = new Point(0, 0),
+                Size = ClientSize
+            };
+            Controls.Add(mapPictureBox);
+        }        
     }
 }

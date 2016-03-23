@@ -48,7 +48,6 @@
   <ItemGroup>
     <Compile Include="AreaTests.cs" />
     <Compile Include="PerlinNoiseGeneratorTests.cs" />
-    <Compile Include="PictureFactoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
