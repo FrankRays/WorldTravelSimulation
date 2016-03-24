@@ -11,9 +11,9 @@ namespace WorldTravelSimulationGUI
 
         public MainWindow()
         {
-            ClientSize = new Size(311,111);
+            ClientSize = new Size(1280,720);
 
-            _map = new Map(311, 111);            
+            _map = new Map(1280, 720);            
             _map.GenerateMap();
 
             MapDraw();            

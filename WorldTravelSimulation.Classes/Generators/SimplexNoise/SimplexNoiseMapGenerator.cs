@@ -10,17 +10,18 @@ namespace WorldTravelSimulation.Classes.Generators.SimplexNoise
 {
     public class SimplexNoiseMapGenerator : IMapGenerator
     {
-        private readonly Position _currentPosition;        
         private readonly IList<Field> _map;
         private double[,] _simplexNoise;
         private int _fieldsHorizontal;
         private int _fieldsVertical;
-        private Size _fieldSize;   
+        private Size _fieldSize;
+        private Point _currentPoint;
 
         public SimplexNoiseMapGenerator()
         {
             _map = new List<Field>();
-            _currentPosition = new Position();
+            _currentPoint = new Point();
+            _fieldSize = new Size();
         }
 
         public IList<Field> GenerateMap(int fieldsHorizontal, int fieldsVertical)
@@ -32,29 +33,10 @@ namespace WorldTravelSimulation.Classes.Generators.SimplexNoise
 
             GenerateSimplexNoise();
 
-            _currentPosition.X = 0;
-            _currentPosition.Y = 0;            
-
-            for (int i = 0; i < fieldsHorizontal; i++)
-            {
-                for (int j = 0; j < fieldsVertical; j++)
-                {
-                    CalculateCurrentPosition(i,j);
-                    if (IsGroundOnCurrentPosition())
-                        GenerateSpecificFieldAndAddToMap(new Ground());
-                    if (IsWaterOnCurrentPosition())
-                        GenerateSpecificFieldAndAddToMap(new Water());
-                }
-            }
+            GenerateFieldsAndAddToMap();
 
             return _map;
-        }
-
-        private void CalculateCurrentPosition(int i, int j)
-        {
-            _currentPosition.X = _fieldSize.Width*i;
-            _currentPosition.Y = _fieldSize.Height*j;
-        }
+        }        
 
         public void CalculateFieldSizeFromFieldsAmount(int fieldsHorizontal, int fieldsVertical)
         {
@@ -63,13 +45,6 @@ namespace WorldTravelSimulation.Classes.Generators.SimplexNoise
                 Height = (double) 1/fieldsVertical,
                 Width = (double) 1/fieldsHorizontal
             };
-        }        
-
-        private void GenerateSpecificFieldAndAddToMap(Field field)
-        {
-            field.Size = new Size() {Height = _fieldSize.Height, Width = _fieldSize.Width};
-            field.Position = new Position() {X = _currentPosition.X, Y = _currentPosition.Y};
-            _map.Add(field);
         }
 
         private void GenerateSimplexNoise()
@@ -94,35 +69,48 @@ namespace WorldTravelSimulation.Classes.Generators.SimplexNoise
                     _simplexNoise[i, j] = 0.5 * (1 + noise.GetNoise(x, y));
                 }
             }
-        }        
+        }
 
-        public Point SimplexNoisePointFromFieldPosition(double x, double y)
+        private void GenerateFieldsAndAddToMap()
         {
-            int pointX = 0;
-            int pointY = 0;
-
-            if (x > 0)
+            for (_currentPoint.X = 0; _currentPoint.X < _fieldsHorizontal; _currentPoint.X++)
             {
-                pointX = (int)Math.Ceiling(x * _fieldsHorizontal) - 1;
+                for (_currentPoint.Y = 0; _currentPoint.Y < _fieldsVertical; _currentPoint.Y++)
+                {
+                    if (IsGroundOnCurrentPoint())
+                        GenerateSpecificFieldAndAddToMap(new Ground());
+                    if (IsWaterOnCurrentPoint())
+                        GenerateSpecificFieldAndAddToMap(new Water());
+                }
             }
-            if (y > 0)
-            {
-                pointY = (int)Math.Ceiling(y * _fieldsVertical) - 1;
-            }                        
+        }
 
-            return new Point(pointX, pointY);
-        }                
-        
-        private bool IsGroundOnCurrentPosition()
+        private void GenerateSpecificFieldAndAddToMap(Field field)
         {
-            Point simplexNoisePoint = SimplexNoisePointFromFieldPosition(_currentPosition.Y, _currentPosition.X);
-            return _simplexNoise[simplexNoisePoint.X, simplexNoisePoint.Y] >= 0.5;
+            field.Size = new Size() {Height = _fieldSize.Height, Width = _fieldSize.Width};
+            field.Position = GetFieldPositionFromCurrentPoint();
+            _map.Add(field);
+        }
+
+        private Position GetFieldPositionFromCurrentPoint()
+        {           
+            Position fieldPosition = new Position()
+            {
+                X = _fieldSize.Width * _currentPoint.X,
+                Y = _fieldSize.Height * _currentPoint.Y
+            };
+
+            return fieldPosition;
+        }
+
+        private bool IsGroundOnCurrentPoint()
+        {
+            return _simplexNoise[_currentPoint.X, _currentPoint.Y] >= 0.5;
         }        
 
-        private bool IsWaterOnCurrentPosition()
-        {
-            Point simplexNoisePoint = SimplexNoisePointFromFieldPosition(_currentPosition.Y, _currentPosition.X);
-            return _simplexNoise[simplexNoisePoint.X, simplexNoisePoint.Y] < 0.5;
+        private bool IsWaterOnCurrentPoint()
+        {            
+            return _simplexNoise[_currentPoint.X, _currentPoint.Y] < 0.5;
         }
     }
 }
