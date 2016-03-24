@@ -53,67 +53,18 @@ namespace WorldTravelSimulation.Tests
                 X = 1.1,
                 Y = 0
             }));
-        }
-        [Test]
-        public void SomeFieldInMapCoverPosition()
-        {
-            Map m = new Map();            
-
-            m.AddField(new Field()
-            {
-                Position = new Position
-                {
-                    X = 0,
-                    Y = 0
-                },
-                Size = new Size
-                {
-                    Width = 0.1,
-                    Height = 0.1
-                }
-            });
-
-            Assert.AreNotEqual(null, m.GetFieldByPosition(new Position
-            {
-                X = 0.05,
-                Y = 0.05
-            }));
-        }
-        [Test]
-        public void AnyFieldInMapCoverPosition()
-        {
-            Map m = new Map();
-            
-            m.AddField(new Field()
-            {
-                Position = new Position
-                {
-                    X = 0,
-                    Y = 0
-                },
-                Size = new Size
-                {
-                    Width = 0.1,
-                    Height = 0.1
-                }
-            });
-
-            Assert.AreEqual(null, m.GetFieldByPosition(new Position
-            {
-                X = 0.3,
-                Y = 0.3
-            }));
-        }
+        }                
 
         [TestCase(1,1)]
         [TestCase(11,11)]
         [TestCase(100,100)]
         [TestCase(11,13)]
         [TestCase(13,11)]
+        [TestCase(331,111)]
         public void GeneratedMapSizeTest(int fieldsHorizontal, int fieldsVertical)
         {
-            Map map = new Map();
-            map.GenerateMap(fieldsHorizontal, fieldsVertical);
+            Map map = new Map(fieldsHorizontal,fieldsVertical);
+            map.GenerateMap();
 
             int mapSize = fieldsHorizontal*fieldsVertical;
 

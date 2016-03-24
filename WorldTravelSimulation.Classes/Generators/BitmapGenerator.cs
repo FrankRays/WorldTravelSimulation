@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using WorldTravelSimulation.Classes.Area;
+using WorldTravelSimulation.Classes.GUI;
 
-namespace WorldTravelSimulation.Classes.GUI
+namespace WorldTravelSimulation.Classes.Generators
 {
     public class BitmapGenerator
     {
@@ -13,18 +15,18 @@ namespace WorldTravelSimulation.Classes.GUI
 
             Bitmap bitmap = new Bitmap(fieldsHorizontal, fieldsVertical);
 
-            IList<Field> fields = fieldMap.GetAllFields();
+            IList<Field> fields = fieldMap.GetAllFields();            
 
             foreach (var f in fields)
             {
                 Color color = GetColor(f);
 
-                int x = (int)(f.Position.X * fieldsHorizontal);
-                int y = (int)(f.Position.Y * fieldsVertical);
+                int x = (int)Math.Round(f.Position.X * fieldsHorizontal,0);
+                int y = (int)Math.Round(f.Position.Y * fieldsVertical,0);                
 
                 bitmap.SetPixel(x, y, color);
             }
-
+            
             return bitmap;
         }
 

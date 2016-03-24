@@ -33,12 +33,13 @@ namespace WorldTravelSimulation.Classes.Generators.SimplexNoise
             GenerateSimplexNoise();
 
             _currentPosition.X = 0;
-            _currentPosition.Y = 0;
+            _currentPosition.Y = 0;            
 
-            for (_currentPosition.X = 0; _currentPosition.X < 1; _currentPosition.X += _fieldSize.Width)
+            for (int i = 0; i < fieldsHorizontal; i++)
             {
-                for (_currentPosition.Y = 0;  _currentPosition.Y < 1; _currentPosition.Y += _fieldSize.Height)
+                for (int j = 0; j < fieldsVertical; j++)
                 {
+                    CalculateCurrentPosition(i,j);
                     if (IsGroundOnCurrentPosition())
                         GenerateSpecificFieldAndAddToMap(new Ground());
                     if (IsWaterOnCurrentPosition())
@@ -47,6 +48,12 @@ namespace WorldTravelSimulation.Classes.Generators.SimplexNoise
             }
 
             return _map;
+        }
+
+        private void CalculateCurrentPosition(int i, int j)
+        {
+            _currentPosition.X = _fieldSize.Width*i;
+            _currentPosition.Y = _fieldSize.Height*j;
         }
 
         public void CalculateFieldSizeFromFieldsAmount(int fieldsHorizontal, int fieldsVertical)

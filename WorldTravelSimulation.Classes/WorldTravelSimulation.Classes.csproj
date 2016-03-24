@@ -52,7 +52,7 @@
     <Compile Include="Generators\SimplexNoise\SimplexNoiseOctave.cs" />
     <Compile Include="Area\Ground.cs" />
     <Compile Include="Area\Water.cs" />
-    <Compile Include="GUI\BitmapGenerator.cs" />
+    <Compile Include="Generators\BitmapGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
