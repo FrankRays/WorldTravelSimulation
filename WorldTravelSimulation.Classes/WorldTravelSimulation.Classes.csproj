@@ -42,18 +42,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Area\Field.cs" />
-    <Compile Include="Area\Map.cs" />
+    <Compile Include="Generators\Bitmap\TerrainBitmapGenerator.cs" />
+    <Compile Include="Generators\IAirPortGenerator.cs" />
+    <Compile Include="Generators\RandomAirPortGenerator.cs" />
+    <Compile Include="SimulationObjects\DynamicSimulationObject.cs" />
+    <Compile Include="SimulationObjects\StaticSimulationObject.cs" />
+    <Compile Include="SimulationObjects\Terrain\Terrain.cs" />
+    <Compile Include="SimulationObjects\StaticSimulationObjects\AirPort.cs" />
+    <Compile Include="SimulationObjects\SimulationObject.cs" />
     <Compile Include="Format\Position.cs" />
     <Compile Include="Format\Size.cs" />
-    <Compile Include="Generators\IMapGenerator.cs" />
-    <Compile Include="Generators\SimplexNoise\SimplexNoiseMapGenerator.cs" />
-    <Compile Include="Generators\SimplexNoise\SimplexNoiseGenerator.cs" />
-    <Compile Include="Generators\SimplexNoise\SimplexNoiseOctave.cs" />
-    <Compile Include="Area\Ground.cs" />
-    <Compile Include="Area\Water.cs" />
-    <Compile Include="Generators\BitmapGenerator.cs" />
+    <Compile Include="Generators\ITerrainGenerator.cs" />
+    <Compile Include="Generators\SimplexNoiseTerrainGenerator\SimplexNoiseTerrainGenerator.cs" />
+    <Compile Include="Generators\SimplexNoiseTerrainGenerator\SimplexNoiseGenerator.cs" />
+    <Compile Include="Generators\SimplexNoiseTerrainGenerator\SimplexNoiseOctave.cs" />
+    <Compile Include="SimulationObjects\Terrain\Ground.cs" />
+    <Compile Include="SimulationObjects\Terrain\Water.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="World\World.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

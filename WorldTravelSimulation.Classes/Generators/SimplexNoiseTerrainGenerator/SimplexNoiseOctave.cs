@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WorldTravelSimulation.Classes.Generators.SimplexNoise
+namespace WorldTravelSimulation.Classes.Generators.SimplexNoiseTerrainGenerator
 {
     public class SimplexNoiseOctave
     {

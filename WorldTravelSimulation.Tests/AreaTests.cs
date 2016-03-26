@@ -1,6 +1,8 @@
 ﻿using NUnit.Framework;
-using WorldTravelSimulation.Classes.Area;
 using WorldTravelSimulation.Classes.Format;
+using WorldTravelSimulation.Classes.Generators.SimplexNoiseTerrainGenerator;
+using WorldTravelSimulation.Classes.SimulationObjects;
+using WorldTravelSimulation.Classes.World;
 
 namespace WorldTravelSimulation.Tests
 {
@@ -11,9 +13,9 @@ namespace WorldTravelSimulation.Tests
         [TestCase(0, 1)]
         [TestCase(1, 0)]
         [TestCase(0.5, 0.5)]
-        public void FieldCoverPosition(double pointPositionX, double pointPositionY)
+        public void SimulationObjectCoverPosition(double pointPositionX, double pointPositionY)
         {
-            Field f = new Field()
+            SimulationObject f = new SimulationObject()
             {
                 Position = new Position
                 {
@@ -26,16 +28,16 @@ namespace WorldTravelSimulation.Tests
                     Height = 1
                 }
             };
-            Assert.AreEqual(true, f.DoesFieldCoverPosition(new Position()
+            Assert.AreEqual(true, f.DoesSimulationObjectCoverPosition(new Position()
             {
                 X = pointPositionX,
                 Y = pointPositionY
             }));
         }
         [Test]
-        public void FieldNotCoverPosition()
+        public void SimulationObjectNotCoverPosition()
         {
-            Field f = new Field()
+            SimulationObject f = new SimulationObject()
             {
                 Position = new Position
                 {
@@ -48,27 +50,27 @@ namespace WorldTravelSimulation.Tests
                     Height = 1
                 }
             };
-            Assert.AreEqual(false, f.DoesFieldCoverPosition(new Position()
+            Assert.AreEqual(false, f.DoesSimulationObjectCoverPosition(new Position()
             {
                 X = 1.1,
                 Y = 0
             }));
         }                
-
         [TestCase(1,1)]
         [TestCase(11,11)]
         [TestCase(100,100)]
         [TestCase(11,13)]
         [TestCase(13,11)]
         [TestCase(331,111)]
-        public void GeneratedMapSizeTest(int fieldsHorizontal, int fieldsVertical)
+        public void GeneratedMapSizeTest(int simulationObjectsHorizontal, int simulationObjectsVertical)
         {
-            Map map = new Map(fieldsHorizontal,fieldsVertical);
-            map.GenerateMap();
+            World world = new World(simulationObjectsHorizontal,simulationObjectsVertical);
+            world.TerrainGenerator = new SimplexNoiseTerrainGenerator();
+            world.GenerateTerrain();
 
-            int mapSize = fieldsHorizontal*fieldsVertical;
+            int mapSize = simulationObjectsHorizontal*simulationObjectsVertical;
 
-            Assert.AreEqual(mapSize, map.GetAllFields().Count);
+            Assert.AreEqual(mapSize, world.Terrain.Count);
         }
     }
 }

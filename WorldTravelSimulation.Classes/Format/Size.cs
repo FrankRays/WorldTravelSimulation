@@ -2,7 +2,15 @@
 {
     public class Size
     {
-        public double Width { get; set; }
-        public double Height { get; set; }
+        public int Width { get; set; }
+        public int Height { get; set; }
+
+        public Size() { }
+
+        public Size(int width, int height)
+        {
+            Width = width;
+            Height = height;
+        }
     }
 }
